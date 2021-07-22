@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .dropdown {
+            background-color: orange;
+            border-radius: 5px;
+            width: 140px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        #check {
+            display: none;
+        }
+
+        .check-label {
+            display: inline-block;
+            width: 100%;
+            cursor: pointer;
+            line-height: 38px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-items {
+            display: none;
+            margin: 0;
+            padding-bottom: 10px;
+        }
+        
+        input[type="checkbox"]:checked ~ .list-items {
+            display: block;
+        }
+
+        .arrow {
+            transition: .2s;
+            display: inline-block;
+        }
+
+        input[type="checkbox"]:checked ~ .check-label .arrow {
+            transform: rotate(180deg);
+        }
+
+        /* drop-header */
+
+        .logo {
+            margin: 0;
+        }
+
+        .drop-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 500px;
+            background-color: rgb(0, 219, 183);
+        }
+
+        .drop-header-links {
+            display: flex;
+        }
+
+        .drop-header-links > li {
+            margin-left: 10px;
+        }
+
+        .drop-container {
+            position: relative;
+        }
+
+        #drop-down {
+            display: none;
+        }
+
+        .drop-down-label {
+            cursor: pointer;
+            color: red;
+            font-weight: 900;
+        }
+
+        .drop-list {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            left: 5px;
+            padding: 15px 10px;
+            width: 70px;
+            height: 0;
+            overflow: hidden;
+            text-align: center;
+            transition: .2s .2s;
+            background-color: rgb(0, 183, 255);
+        }
+
+        #drop-down:hover ~ .drop-list,
+        .drop-list:hover {
+            opacity: 1;
+            pointer-events: all;
+            height: 70px;
+        }
+
+        .drop-list li +  li {
+            padding-top: 10px;
+        }
+
+        /* =================== */
+
+        .tab {
+            width: 250px;
+            padding: 20px 0;
+            text-align: center;
+            background-color: rgb(0, 183, 255);
+        }
+
+        #op1, #op2 {
+            display: none;
+        }
+
+        .option-btn {
+            display: inline-block;
+            width: 49%;
+            margin: 0;
+            padding: 10px 0;
+            background-color: rgb(210, 143, 255);
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        #op1:checked ~ label[for="op1"],
+        #op2:checked ~ label[for="op2"] {
+            background-color: rgb(188, 93, 252);
+        }
+
+        .content1,
+        .content2 {
+            display: none;
+            background-color: rgb(0, 219, 183);
+        }
+
+        #op1:checked ~ .content1,
+        #op2:checked ~ .content2 {
+            display: block;
+        }
+
+        /* =================== */
+
+        .modal-content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            display: none;
+            border: 20px solid #333;
+            background-color: #777;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Dropdown with checkbox</h1>
+    <div class="dropdown">
+        <input type="checkbox" id="check">
+        <label class="check-label" for="check">
+            Click-me <span class="arrow">&#9660;</span>
+        </label>
+        <ul class="list-items">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+        </ul>
+    </div>
+
+    <header class="drop-header">
+        <h1 class="logo">Logo</h1>
+        <nav>
+            <ul class="drop-header-links">
+                <li>Item 1</li>
+                <li class="drop-container">
+                    <input type="checkbox" id="drop-down">
+                    <label for="drop-down" class="drop-down-label">
+                        Drop-down
+                    </label>
+                    <ul class="drop-list">
+                        <li>Drop 1</li>
+                        <li>Drop 2</li>
+                        <li>Drop 3</li>
+                    </ul>
+                </li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>Tab navegation</h1>
+
+    <div class="tab">
+        <div class="options">
+            <input checked type="radio" id="op1" name="option">
+            <label class="option-btn" for="op1">Option 1</label>
+    
+            <input type="radio" id="op2" name="option">
+            <label class="option-btn" for="op2">Option 2</label>
+            
+            <div class="content1">
+                <p>Harry</p>
+                <p>Rom</p>
+                <p>Hermione</p>
+            </div>
+            <div class="content2">
+                <p>Arya</p>
+                <p>Sansa</p>
+                <p>Jon</p>
+                <p>Robby</p>
+                <p>Bran</p>
+            </div>
+        </div>
+    </div>
+
+    <h1>Modal</h1>
+
+    <div class="modal">
+        <button class="modal-btn">Modal Button</button>
+        <div class="modal-content">
+            <h2>Hello World</h2>
+            <button class="modal-close">X</button>
+        </div>
+    </div>
+
+    <script>
+
+        const modalBtn = document.querySelector('.modal-btn');
+        const modalContent = document.querySelector('.modal-content');
+        const modalClose = document.querySelector('.modal-close');
+
+        modalBtn.addEventListener('click', () => {
+            modalContent.classList.add('active');
+        })
+        modalClose.addEventListener('click', () => {
+            modalContent.classList.remove('active');
+        })
+
+    </script>
+
+</body>
+</html>
